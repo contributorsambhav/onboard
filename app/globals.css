@@ -120,3 +120,237 @@
     @apply bg-background text-foreground;
   }
 }
+
+/* Animation utilities for the hero section */
+@keyframes float-slow {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-15px);
+  }
+}
+
+@keyframes float-medium {
+  0%,
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-10px) translateX(5px);
+  }
+}
+
+@keyframes float-fast {
+  0%,
+  100% {
+    transform: translateY(0) rotate(0);
+  }
+  50% {
+    transform: translateY(-8px) rotate(5deg);
+  }
+}
+
+@keyframes float-spin {
+  0% {
+    transform: translateY(0) rotate(0deg);
+  }
+  50% {
+    transform: translateY(-10px) rotate(180deg);
+  }
+  100% {
+    transform: translateY(0) rotate(360deg);
+  }
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+  50% {
+    transform: scale(1.2);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(0.8);
+    opacity: 0.3;
+  }
+}
+
+.animate-float-slow {
+  animation: float-slow 6s ease-in-out infinite;
+}
+
+.animate-float-medium {
+  animation: float-medium 5s ease-in-out infinite;
+}
+
+.animate-float-fast {
+  animation: float-fast 4s ease-in-out infinite;
+}
+
+.animate-float-spin {
+  animation: float-spin 8s ease-in-out infinite;
+}
+
+.network-path {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 15s linear infinite;
+}
+
+.network-path-alt {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 18s linear infinite;
+}
+
+.network-path-fast {
+  stroke-dasharray: 1000;
+  stroke-dashoffset: 1000;
+  animation: dash 12s linear infinite;
+}
+
+.node-pulse-1 {
+  animation: pulse 4s ease-in-out infinite;
+}
+
+.node-pulse-2 {
+  animation: pulse 6s ease-in-out infinite;
+}
+
+.node-pulse-3 {
+  animation: pulse 8s ease-in-out infinite;
+}
+
+.shadow-glass {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.shadow-blue {
+  box-shadow: 0 4px 12px rgba(59, 130, 246, 0.15);
+}
+
+/* Create the background gradient for the flow */
+#flow-gradient {
+  --color-start: #3b82f6;
+  --color-stop: #10b981;
+  --color-end: transparent;
+}
+
+/* Particle network background */
+.particle-network {
+  background-image: radial-gradient(
+    rgba(59, 130, 246, 0.1) 1px,
+    transparent 1px
+  );
+  background-size: 50px 50px;
+}
+
+/* Add these animation styles for the transaction workflow */
+@keyframes flowAlongPath {
+  0% {
+    offset-distance: 0%;
+  }
+  100% {
+    offset-distance: 100%;
+  }
+}
+
+.crypto-token {
+  animation: flowAlongPath 2s infinite;
+}
+
+.bank-token.transaction-token-1 {
+  animation: flowAlongPath 6s infinite;
+  animation-delay: 0s;
+}
+
+.bank-token.transaction-token-2 {
+  animation: flowAlongPath 6s infinite;
+  animation-delay: 1.5s;
+}
+
+.bank-token.transaction-token-3 {
+  animation: flowAlongPath 6s infinite;
+  animation-delay: 3s;
+}
+
+.bank-token.transaction-token-4 {
+  animation: flowAlongPath 6s infinite;
+  animation-delay: 4.5s;
+}
+
+.crypto-path,
+.bank-path {
+  stroke-dasharray: 4;
+  animation: dash 30s linear infinite;
+}
+
+@keyframes dash {
+  to {
+    stroke-dashoffset: 1000;
+  }
+}
+
+@keyframes pulseNode {
+  0% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1);
+    opacity: 0.8;
+  }
+}
+
+/* For browsers that support offset-path */
+.crypto-token.transaction-token-1 {
+  offset-path: path("M110 80 L150 80");
+  animation: flowAlongPath 2s infinite;
+}
+
+.crypto-token.transaction-token-2 {
+  offset-path: path("M250 80 L290 80");
+  animation: flowAlongPath 2s infinite;
+}
+
+.bank-token.transaction-token-1 {
+  offset-path: path("M90 90 L130 90");
+  animation: flowAlongPath 5s infinite;
+}
+
+.bank-token.transaction-token-2 {
+  offset-path: path("M180 90 L220 90");
+  animation: flowAlongPath 5s infinite 1s;
+}
+
+.bank-token.transaction-token-3 {
+  offset-path: path("M270 90 L310 90");
+  animation: flowAlongPath 5s infinite 2s;
+}
+
+.bank-token.transaction-token-4 {
+  offset-path: path("M335 70 L335 60");
+  animation: flowAlongPath 5s infinite 3s;
+}
+
+/* Animation fallbacks for older browsers */
+@media screen and (prefers-reduced-motion: reduce) {
+  .crypto-token,
+  .bank-token {
+    animation: none;
+  }
+}

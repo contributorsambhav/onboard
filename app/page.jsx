@@ -1,21 +1,16 @@
 import Comparison from "@/components/app/comparison";
-import CombinedDashboard from "../components/app/gasfeesestimator";
-import { Button } from "@/components/ui/button";
 import FeeEstimator from "@/components/app/feeEstimator";
 import PaymentDashboard from "@/components/app/paymentDashboard";
+import HeroLanding from "@/components/app/heroLanding";
+import CryptoTransaction from "@/components/app/cryptoTransaction";
+
 export default function Home() {
   return (
     <div className="pb-10">
-      <section className="flex flex-col text-xl font-bold lg:text-3xl xl:text-4xl text-center h-44 md:h-56 lg:h-64 justify-center items-center">
-        <h3>Why Choose Crypto for International Trades</h3>
-        <p className="px-5 w-full max-w-lg text-sm md:text-base font-normal">
-          Experience faster, cheaper, and more secure international transactions
-          with cryptocurrency payments
-        </p>
-      </section>
+      <HeroLanding />
       <section className="px-5">
         <Comparison />
-        <div className="border flex md:items-center flex-col md:flex-row md:justify-between border-neutral-500 px-5 py-3 my-5 bg-neutral-100 rounded-md">
+        {/* <div className="border flex md:items-center flex-col md:flex-row md:justify-between border-neutral-500 px-5 py-3 my-5 bg-neutral-100 rounded-md">
           <div>
             <h3 className="text-neutral-800 font-medium text-lg">
               Ready to experience the crypto advantage?
@@ -29,8 +24,9 @@ export default function Home() {
               Calculate Saving
             </Button>
           </div>
-        </div>
+        </div> */}
       </section>
+      <CryptoTransaction />
       <section className="px-5">
         <FeeEstimator />
       </section>
