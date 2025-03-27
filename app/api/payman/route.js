@@ -8,17 +8,15 @@ export async function POST(request) {
     console.log(amountDecimal);
     // Initialize Paymanai with your server-only API secret
     const payman = new Paymanai({
-      xPaymanAPISecret: process.env.PaymanAPISecret
+      xPaymanAPISecret: process.env.PaymanAPISecret,
     });
-
-    
 
     // Send the payment using the dynamic amount
     const payment = await payman.payments.sendPayment({
       amountDecimal, // dynamic amount
       payeeId,
       memo,
-      metadata: { department: "marketing" }
+      metadata: { department: "marketing" },
     });
 
     // Fetch the spendable balance (for example, in USD)
@@ -26,15 +24,17 @@ export async function POST(request) {
     return new Response(
       JSON.stringify({
         payment,
-        spendableBalance: balance
+        spendableBalance: balance,
       }),
-      { status: 200 }
+      { status: 200 },
     );
   } catch (error) {
     console.error("Error processing Payman transaction:", error);
     return new Response(
-      JSON.stringify({ error: "Error processing transaction. See server logs for details." }),
-      { status: 500 }
+      JSON.stringify({
+        error: "Error processing transaction. See server logs for details.",
+      }),
+      { status: 500 },
     );
   }
 }

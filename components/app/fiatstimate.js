@@ -1,10 +1,16 @@
-"use client"
+"use client";
 
 import { useState } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 const feeRates = {
   bank: { outgoing: 30, incoming: 15, conversion: 3 }, // SWIFT fees (in USD)
@@ -22,11 +28,14 @@ export default function Fiatstimate() {
   const calculateFee = () => {
     let totalFee = 0;
     if (method === "bank") {
-      totalFee = feeRates.bank.outgoing + (amount * feeRates.bank.conversion) / 100;
+      totalFee =
+        feeRates.bank.outgoing + (amount * feeRates.bank.conversion) / 100;
     } else if (method === "paypal") {
-      totalFee = (amount * feeRates.paypal.transaction) / 100 + feeRates.paypal.fixed;
+      totalFee =
+        (amount * feeRates.paypal.transaction) / 100 + feeRates.paypal.fixed;
     } else if (method === "stripe") {
-      totalFee = (amount * (feeRates.stripe.transaction + feeRates.stripe.intl)) / 100;
+      totalFee =
+        (amount * (feeRates.stripe.transaction + feeRates.stripe.intl)) / 100;
     } else if (method === "wise") {
       totalFee = (amount * feeRates.wise.max) / 100;
     } else if (method === "payoneer") {
@@ -49,10 +58,10 @@ export default function Fiatstimate() {
           className="w-full"
         />
         <Select value={method} onValueChange={setMethod}>
-          <SelectTrigger>
+          <SelectTrigger className="w-full">
             <SelectValue placeholder="Select Payment Method" />
           </SelectTrigger>
-          <SelectContent>
+          <SelectContent className="w-full">
             <SelectItem value="bank">Bank Wire Transfer</SelectItem>
             <SelectItem value="paypal">PayPal</SelectItem>
             <SelectItem value="stripe">Stripe</SelectItem>
@@ -60,9 +69,13 @@ export default function Fiatstimate() {
             <SelectItem value="payoneer">Payoneer</SelectItem>
           </SelectContent>
         </Select>
-        <Button onClick={calculateFee} className="w-full">Estimate Fee</Button>
+        <Button onClick={calculateFee} className="w-full">
+          Estimate Fee
+        </Button>
         {fee > 0 && (
-          <div className="text-lg font-semibold text-green-600">Estimated Fee: ${fee}</div>
+          <div className="font-semibold text-green-600">
+            Estimated Fee: ${fee}
+          </div>
         )}
       </CardContent>
     </Card>

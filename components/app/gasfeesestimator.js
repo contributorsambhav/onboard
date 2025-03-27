@@ -2,12 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { ethers } from "ethers";
-import {
-  Card,
-  CardContent,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import {
@@ -36,11 +31,14 @@ function Fiatstimate() {
   const calculateFee = () => {
     let totalFee = 0;
     if (method === "bank") {
-      totalFee = feeRates.bank.outgoing + (amount * feeRates.bank.conversion) / 100;
+      totalFee =
+        feeRates.bank.outgoing + (amount * feeRates.bank.conversion) / 100;
     } else if (method === "paypal") {
-      totalFee = (amount * feeRates.paypal.transaction) / 100 + feeRates.paypal.fixed;
+      totalFee =
+        (amount * feeRates.paypal.transaction) / 100 + feeRates.paypal.fixed;
     } else if (method === "stripe") {
-      totalFee = (amount * (feeRates.stripe.transaction + feeRates.stripe.intl)) / 100;
+      totalFee =
+        (amount * (feeRates.stripe.transaction + feeRates.stripe.intl)) / 100;
     } else if (method === "wise") {
       totalFee = (amount * feeRates.wise.max) / 100;
     } else if (method === "payoneer") {
@@ -50,11 +48,13 @@ function Fiatstimate() {
   };
 
   return (
-    <Card className="w-full max-w-lg mx-auto p-6">
-      <CardHeader>
-        <CardTitle>International Transaction Fee Estimator</CardTitle>
-      </CardHeader>
-      <CardContent className="flex flex-col space-y-4">
+    <div className="w-full max-w-lg border rounded-md h-fit shadow p-6">
+      <div>
+        <h3 className="text-2xl font-bold">
+          International Transaction Fee Estimator
+        </h3>
+      </div>
+      <div className="flex flex-col space-y-4">
         <Input
           type="number"
           value={amount}
@@ -63,7 +63,7 @@ function Fiatstimate() {
           className="w-full"
         />
         <Select value={method} onValueChange={setMethod}>
-          <SelectTrigger>
+          <SelectTrigger className="cursor-pointer">
             <SelectValue placeholder="Select Payment Method" />
           </SelectTrigger>
           <SelectContent>
@@ -74,7 +74,7 @@ function Fiatstimate() {
             <SelectItem value="payoneer">Payoneer</SelectItem>
           </SelectContent>
         </Select>
-        <Button onClick={calculateFee} className="w-full">
+        <Button onClick={calculateFee} className="w-full cursor-pointer">
           Estimate Fee
         </Button>
         {fee > 0 && (
@@ -82,8 +82,8 @@ function Fiatstimate() {
             Estimated Fee: ${fee}
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
@@ -91,7 +91,7 @@ function Fiatstimate() {
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY;
 const provider = new ethers.JsonRpcProvider(
-  `https://eth-sepolia.g.alchemy.com/v2/${alchemyKey}`
+  `https://eth-sepolia.g.alchemy.com/v2/${alchemyKey}`,
 );
 const TOKEN_ADDRESS = process.env.NEXT_PUBLIC_USDC_ADDRESS; // e.g., "0xYourUSDCAddress"
 const PRIVATE_KEY = process.env.NEXT_PUBLIC_PRIVATE_KEY; // WARNING: Do not expose private keys in production!
@@ -142,12 +142,16 @@ function TransactionDashboard() {
       const decimals = 6; // USDC uses 6 decimals
       const parsedAmount = ethers.parseUnits(inputAmount.toString(), decimals);
       const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
-      const tokenContract = new ethers.Contract(TOKEN_ADDRESS, TOKEN_ABI, wallet);
+      const tokenContract = new ethers.Contract(
+        TOKEN_ADDRESS,
+        TOKEN_ABI,
+        wallet,
+      );
 
       // Estimate gas limit for the transfer call
       const gasLimit = await tokenContract.transfer.estimateGas(
         RECIPIENT,
-        parsedAmount
+        parsedAmount,
       );
       const feeData = await provider.getFeeData();
       const gasPrice = feeData.gasPrice;
@@ -162,7 +166,7 @@ function TransactionDashboard() {
         [
           "function latestRoundData() public view returns (uint80, int256, uint256, uint256, uint80)",
         ],
-        provider
+        provider,
       );
       const roundData = await priceFeed.latestRoundData();
       const ethPriceUSD = Number(ethers.formatUnits(roundData[1], 8));
@@ -228,11 +232,11 @@ function TransactionDashboard() {
   };
 
   return (
-    <Card className="w-full max-w-md mx-auto p-6 mt-10 space-y-6">
-      <CardHeader>
-        <CardTitle className="text-2xl font-bold">Payment Dashboard</CardTitle>
-      </CardHeader>
-      <CardContent className="space-y-4">
+    <div className="w-full max-w-md rounded-md shadow p-6 border space-y-6">
+      <div>
+        <h3 className="text-2xl font-bold">Payment Dashboard</h3>
+      </div>
+      <div className="space-y-4">
         <Input
           type="number"
           value={amount}
@@ -245,16 +249,20 @@ function TransactionDashboard() {
         {gasResult && (
           <div className="space-y-2">
             <div>
-              <span className="font-semibold">Estimated Gas Limit:</span> {gasResult.gasLimit} gas units
+              <span className="font-semibold">Estimated Gas Limit:</span>{" "}
+              {gasResult.gasLimit} gas units
             </div>
             <div>
-              <span className="font-semibold">Gas Price:</span> {gasResult.gasPrice} gwei
+              <span className="font-semibold">Gas Price:</span>{" "}
+              {gasResult.gasPrice} gwei
             </div>
             <div>
-              <span className="font-semibold">Total Gas Fee:</span> {gasResult.totalGasFeeETH} ETH (${gasResult.gasFeeUSD})
+              <span className="font-semibold">Total Gas Fee:</span>{" "}
+              {gasResult.totalGasFeeETH} ETH (${gasResult.gasFeeUSD})
             </div>
             <div>
-              <span className="font-semibold">Total Deduction:</span> {amount} USDC + {gasResult.totalGasFeeETH} ETH (${gasResult.gasFeeUSD})
+              <span className="font-semibold">Total Deduction:</span> {amount}{" "}
+              USDC + {gasResult.totalGasFeeETH} ETH (${gasResult.gasFeeUSD})
             </div>
           </div>
         )}
@@ -264,11 +272,12 @@ function TransactionDashboard() {
         {txError && <div className="text-red-500 text-sm">{txError}</div>}
         {spendableBalance !== null && (
           <div className="mt-4">
-            <span className="font-semibold">Spendable Balance:</span> ${Number(spendableBalance).toFixed(2)}
+            <span className="font-semibold">Spendable Balance:</span> $
+            {Number(spendableBalance).toFixed(2)}
           </div>
         )}
-      </CardContent>
-    </Card>
+      </div>
+    </div>
   );
 }
 
@@ -276,9 +285,13 @@ function TransactionDashboard() {
 
 export default function CombinedDashboard() {
   return (
-    <div className="space-y-10">
-      <Fiatstimate />
-      <TransactionDashboard />
+    <div className="grid lg:grid-cols-2 gap-10 h-[90vh]">
+      <div className="flex justify-center items-center w-full">
+        <Fiatstimate />
+      </div>
+      <div className="flex justify-center items-center w-full">
+        <TransactionDashboard />
+      </div>
     </div>
   );
 }
