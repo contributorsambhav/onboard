@@ -1,10 +1,11 @@
 import Comparison from "@/components/app/comparison";
 import CombinedDashboard from "../components/app/gasfeesestimator";
 import { Button } from "@/components/ui/button";
-import FeeCalculator from "@/components/app/feeCalculator";
+import FeeEstimator from "@/components/app/feeEstimator";
+import PaymentDashboard from "@/components/app/paymentDashboard";
 export default function Home() {
   return (
-    <div>
+    <div className="pb-10">
       <section className="flex flex-col text-xl font-bold lg:text-3xl xl:text-4xl text-center h-44 md:h-56 lg:h-64 justify-center items-center">
         <h3>Why Choose Crypto for International Trades</h3>
         <p className="px-5 w-full max-w-lg text-sm md:text-base font-normal">
@@ -31,9 +32,12 @@ export default function Home() {
         </div>
       </section>
       <section className="px-5">
-        <FeeCalculator />
+        <FeeEstimator />
       </section>
-      <CombinedDashboard />
+      <section className="px-5 mt-5">
+        <PaymentDashboard />
+      </section>
+      {/* <CombinedDashboard /> */}
     </div>
   );
 }
