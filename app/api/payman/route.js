@@ -5,7 +5,7 @@ export async function POST(request) {
   try {
     // Parse request JSON data from client
     const { payeeId, amountDecimal, memo } = await request.json();
-    console.log(amountDecimal);
+    // console.log(amountDecimal);
     // Initialize Paymanai with your server-only API secret
     const payman = new Paymanai({
       xPaymanAPISecret: process.env.PaymanAPISecret,

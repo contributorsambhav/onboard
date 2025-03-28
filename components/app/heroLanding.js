@@ -4,12 +4,12 @@ import { Button } from "../ui/button";
 const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
   weight: ["400"],
-}) 
+});
 
 export default function HeroLanding() {
   return (
     <section
-      className={`relative flex font-extrabold flex-col text-xl lg:text-3xl xl:text-4xl text-center min-h-[60vh] lg:min-h-[70vh] justify-center items-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-50 ${instrumentSerif.className}`}
+      className={`relative flex font-extrabold flex-col text-xl lg:text-3xl xl:text-4xl text-center min-h-[60vh] lg:min-h-[70vh] justify-center items-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-50`}
     >
       <div
         className="absolute inset-0 particle-network"
