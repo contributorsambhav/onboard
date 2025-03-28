@@ -89,11 +89,11 @@ export default function PaymentDashboard() {
             </div>
           </div>
           {/* Render this on the basis of data */}
-          <TransactionDetails
+          {/* <TransactionDetails
             settlementTime={transactionDetails.settlementTime}
             exchangeRate={transactionDetails.exchangeRate}
             crypto={true}
-          />
+          /> */}
           <div>
             <Button className="bg-blue-700 cursor-pointer hover:bg-blue-700 w-full">
               Send Payment
