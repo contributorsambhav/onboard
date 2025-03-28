@@ -8,8 +8,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
-import { Progress } from "../ui/progress";
+} from "../ui/select"; 
 import { Button } from "../ui/button";
 import { ArrowRightLeft, DollarSign } from "lucide-react";
 import { ethers } from "ethers";
@@ -169,6 +168,8 @@ export default function FeeEstimator() {
   const [method, setMethod] = useState("bank");
   const [fee, setFee] = useState(0);
 
+
+
   const calculateFee = () => {
     let totalFee = 0;
     if (method === "bank") {
@@ -188,17 +189,24 @@ export default function FeeEstimator() {
     setFee(totalFee.toFixed(2));
   };
 
+  const handleAmountChange = (e) => {
+    setAmount(Number(e.target.value));
+    calculateFee();
+  }
+
+
   return (
     <div className="grid gap-3 md:grid-cols-2">
       {/* Traditional Payment Fee Estimator */}
-      <div className="flex justify-center w-full">
+      <div className="flex justify-center w-full h-fit">
         <div className="border rounded-md p-3 w-full">
           <div>
             <h3 className="text-lg lg:text-xl font-semibold">
               International Transaction Fee Estimator
             </h3>
             <p className="text-neutral-700 text-sm">
-              Compare the fees between traditional payment methods and cryptocurrency
+              Compare the fees between traditional payment methods and
+              cryptocurrency
             </p>
           </div>
           <div className="pt-2">
@@ -207,7 +215,7 @@ export default function FeeEstimator() {
               <Input
                 type="number"
                 value={amount}
-                onChange={(e) => setAmount(Number(e.target.value))}
+                onChange={handleAmountChange}
                 placeholder="Enter transaction amount"
                 className="w-full"
               />
@@ -236,8 +244,6 @@ export default function FeeEstimator() {
           </div>
         </div>
       </div>
-
-      {/* Fee Comparison Results */}
       <div className="flex justify-center w-full h-fit">
         <div className="border rounded-md p-3 w-full">
           <div>
@@ -248,7 +254,6 @@ export default function FeeEstimator() {
               See the fees for traditional and crypto transactions
             </p>
           </div>
-          {/* Traditional Fee */}
           <div className="pt-2">
             <div className="flex justify-between items-center">
               <div className="flex items-center gap-2">
@@ -276,7 +281,9 @@ export default function FeeEstimator() {
                   <p className="text-lg font-normal">
                     Cryptocurrency Payment Fee
                   </p>
-                  <p className="text-neutral-700 text-sm">instantaneous ttansaction</p>
+                  <p className="text-neutral-700 text-sm">
+                    instantaneous ttansaction
+                  </p>
                 </div>
               </div>
               <p className="text-green-800 font-bold">
@@ -304,27 +311,43 @@ export default function FeeEstimator() {
             className="w-full cursor-pointer"
             disabled={txLoading || gasLoading}
           >
-            {txLoading ? "Processing Transaction..." : "Send Payment via Payman TSD"}
+            {txLoading
+              ? "Processing Transaction..."
+              : "Send Payment via Payman TSD"}
           </Button>
-          <div className="border p-3 w-full border-green-200 rounded-md bg-green-50/20">
-              <div className="flex justify-between items-center">
-                <p>Your Savings</p>
-                <p className="text-green-700 font-bold">${gasResult && fee > 0 ? fee-gasResult.gasFeeUSD: 0}</p>
-              </div>
-              </div>
-          <Progress value={gasResult && fee > 0
-                ? (((Number(fee) - Number(gasResult.gasFeeUSD)) / Number(fee)) * 100).toFixed(2)
-                : 0} className="bg-neutral-100 mt-2" />
-          <div className="text-center text-xs pt-0.5">
-            {/* Only calculate savings if gasResult exists and fee is non-zero */}
+          {/* <div className="border p-3 w-full border-green-200 rounded-md bg-green-50/20">
+            <div className="flex justify-between items-center">
+              <p>Your Savings</p>
+              <p className="text-green-700 font-bold">
+                ${gasResult && fee > 0 ? fee - gasResult.gasFeeUSD : 0}
+              </p>
+            </div>
+          </div> */}
+          {/* <Progress
+            value={
+              gasResult && fee > 0
+                ? (
+                    ((Number(fee) - Number(gasResult.gasFeeUSD)) /
+                      Number(fee)) *
+                    100
+                  ).toFixed(2)
+                : 0
+            }
+            className="bg-neutral-100 mt-2"
+          /> */}
+          {/* <div className="text-center text-xs pt-0.5">
             You save{" "}
             <span className="font-medium text-green-400">
               {gasResult && fee > 0
-                ? (((Number(fee) - Number(gasResult.gasFeeUSD)) / Number(fee)) * 100).toFixed(2)
+                ? (
+                    ((Number(fee) - Number(gasResult.gasFeeUSD)) /
+                      Number(fee)) *
+                    100
+                  ).toFixed(2)
                 : "-"}
             </span>{" "}
             % using crypto for this transaction
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

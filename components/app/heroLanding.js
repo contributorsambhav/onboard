@@ -1,15 +1,15 @@
-import { Montserrat } from "next/font/google";
+import { Instrument_Serif } from "next/font/google";
 import { Button } from "../ui/button";
 
-const montserrat = Montserrat({
+const instrumentSerif = Instrument_Serif({
   subsets: ["latin"],
-  weight: ["400", "700"],
-});
+  weight: ["400"],
+}) 
 
 export default function HeroLanding() {
   return (
     <section
-      className={`relative flex font-extrabold flex-col text-xl lg:text-3xl xl:text-4xl text-center min-h-[60vh] lg:min-h-[70vh] justify-center items-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-50 ${montserrat.className}`}
+      className={`relative flex font-extrabold flex-col text-xl lg:text-3xl xl:text-4xl text-center min-h-[60vh] lg:min-h-[70vh] justify-center items-center overflow-hidden bg-gradient-to-br from-blue-50 via-white to-blue-50 ${instrumentSerif.className}`}
     >
       <div
         className="absolute inset-0 particle-network"
@@ -177,13 +177,15 @@ export default function HeroLanding() {
           <path d="M12 1.75L5.75 12.25L12 16L18.25 12.25L12 1.75ZM12 22.25L5.75 13L12 16.75L18.25 13L12 22.25Z" />
         </svg>
       </div>
-      <div className="relative z-10 px-4 md:px-6 lg:px-8 max-w-4xl mx-auto">
-        <div className="px-3 font-sans font-normal text-xs inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-sm shadow-sm border border-blue-100/50 rounded-full py-1.5 mb-5">
-          <div className="w-2 h-2 rounded-full bg-neutral-500 animate-pulse"></div>
-          <span className="font-medium text-neutral-800">Onboard</span> -{" "}
-          <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-neutral-500">
-            Powered by PaymanAI
-          </span>
+      <div className="flex flex-col z-10 px-4 md:px-6 lg:px-8">
+        <div className="flex justify-center items-center">
+          <div className="px-3 w-fit font-sans font-normal text-xs inline-flex items-center gap-1.5 bg-white/80 backdrop-blur-sm shadow-sm border border-blue-100/50 rounded-full py-1.5 mb-5">
+            <div className="w-2 h-2 rounded-full bg-neutral-500 animate-pulse"></div>
+            <span className="font-medium text-neutral-800">Onboard</span> -{" "}
+            <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-neutral-500">
+              Powered by PaymanAI
+            </span>
+          </div>
         </div>
 
         <h1 className="mb-6 text-transparent bg-clip-text bg-gradient-to-r from-neutral-700 via-neutral-800 to-emerald-700 relative inline-block">
