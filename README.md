@@ -4,9 +4,12 @@ Welcome to **Onboard**, a cutting-edge platform designed to revolutionize intern
 
 ---
 
-![image](https://github.com/user-attachments/assets/a6269f86-a633-4144-81d0-9c3c779eb40e)
+![image](https://github.com/user-attachments/assets/e21ebc95-7f3c-4f03-8f2a-e110ac3f9998)
 
 ![image](https://github.com/user-attachments/assets/b75d7770-9513-4c27-9e32-c21546ffd44a)
+
+![image](https://github.com/user-attachments/assets/ae8a9c3a-05ea-47ba-8c38-55e8b980cdfb)
+
 
 ## 🚀 Project Overview
 
@@ -24,30 +27,21 @@ Welcome to **Onboard**, a cutting-edge platform designed to revolutionize intern
 
 ---
 
-## 📖 Table of Contents
+Work In progress !!
 
-1. [Features](#features)
-2. [Technologies Used](#technologies-used)
-3. [Installation](#installation)
-4. [Usage](#usage)
-5. [Future Plans](#future-plans)
-6. [Contributing](#contributing)
-7. [License](#license)
-
----
+![image](https://github.com/user-attachments/assets/02ef0ff2-2f83-4de6-b6a6-a9207e2bb286)
 
 ## 🔧 Features
 
 - Instant cross-border payments
-- AI-powered transaction optimization
 - Support for multiple cryptocurrencies
 - Real-time transaction tracking
-- Integration with existing financial systems
+- Working on payments dashboard for both traditional and cryptocurrency payments
 
 ---
 
 ## 💻 Technologies Used
 
-- **PaymanAI**: AI engine for transaction optimization
+- **PaymanAI**: For secure transactions
 - **Blockchain**: Secure and decentralized payment processing
 - **NextJS**: Frontend framework for user interface
