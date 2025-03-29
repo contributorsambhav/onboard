@@ -8,6 +8,7 @@ import DataTable from "@/components/app/table/dataTable";
 import { instrumentSerif } from "@/lib/fonts";
 import { Users } from "lucide-react";
 import TransactionCard from "@/components/app/transactionCard";
+import AddRecipientDialog from "@/components/app/addRecipientDialog";
 
 export default function RecipientsPage() {
   const tableData = [
@@ -55,10 +56,7 @@ export default function RecipientsPage() {
       <section className="pt-20 px-5">
         <div className="flex items-center gap-3 justify-between">
           <p className="text-2xl font-bold">Recipients</p>
-          <Button className="h-8 text-xs flex items-center" variant="outline">
-            <Plus className="h-4 w-4" />
-            <div>Add Recipient</div>
-          </Button>
+          <AddRecipientDialog />
         </div>
       </section>
       <section className="px-5 mt-5 grid lg:grid-cols-5 gap-4">

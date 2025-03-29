@@ -10,7 +10,9 @@ export default async function Navbar() {
   return (
     <nav className="flex flex-col fixed inset-x-0 top-0 bg-white/10 backdrop-blur-xs border  border-border/40 z-30">
       <div className="flex justify-between px-5 py-3">
-        <div className={`${instrumentSerif.className} text-xl`}>Onboard</div>
+        <Link href="/" className={`${instrumentSerif.className} text-xl`}>
+          Onboard
+        </Link>
         <div className="hidden md:flex items-center gap-3">
           {session ? (
             <div className="flex gap-3 items-center">
