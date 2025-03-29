@@ -14,12 +14,14 @@ export default function HamburgerMenu() {
           onClick={handleToggleMenu}
         />
       </div>
-      <div className="fixed bg-white/10 backdrop-blur-xs top-[50px] left-0 px-5 mx-auto w-full h-auto md:hidden z-[100] ">
+      <div className="fixed top-[50px] left-0 px-5 mx-auto w-full h-auto md:hidden z-[100] ">
         {toggleMenu && (
-          <div className="md:hidden bg-white backdrop-blur-sm animate-menu-animation transform-gpu transition-transform duration-200ms ease-in-out">
-            <div className="cursor-pointer w-fit py-2">Sign Out</div>
-            <div className="cursor-pointer w-fit py-2">Recipients</div>
-            <div className="cursor-pointer w-fit py-2">Connect Wallet</div>
+          <div className="md:hidden block bg-white/10  animate-menu-animation transform-gpu transition-transform duration-200ms ease-in-out">
+            <div>Sign Out</div>
+            <div>
+              <div>Recipients</div>
+              Connect Wallet
+            </div>
           </div>
         )}
       </div>
