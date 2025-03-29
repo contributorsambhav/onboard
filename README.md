@@ -4,7 +4,6 @@ Welcome to **Onboard**, a cutting-edge platform designed to revolutionize intern
 
 ---
 
-
 ![image](https://github.com/user-attachments/assets/b75d7770-9513-4c27-9e32-c21546ffd44a)
 
 ![image](https://github.com/user-attachments/assets/ae8a9c3a-05ea-47ba-8c38-55e8b980cdfb)
@@ -65,25 +64,28 @@ To get started, clone the repository to your local machine using the following c
 ### Setting Up the Project
 
 1. Navigate to the project directory:
+
    ```
    cd onboard
    ```
 
 2. Install the necessary dependencies:
+
    ```
    npm install
    ```
 
 3. Set up environment variables: Create a .env.local file in the root directory with the following content:
-  ```
-  RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/YOUR_ALCHEMY_KEY"
-  ethUsdPriceFeed = "0x694AA1769357215DE4FAC081bf1f309aDC325306"
-  NEXT_PUBLIC_USDC_ADDRESS = "YOUR_USDC_CONTRACT_ADDRESS"
-  NEXT_PUBLIC_PRIVATE_KEY = "YOUR_ETHEREUM_PRIVATE_KEY"
-  PaymanAPISecret = "YOUR_PAYMAN_API_SECRET"
-  NEXT_PUBLIC_ALCHEMY_KEY = "YOUR_ALCHEMY_API_KEY"
 
-  ```
+```
+RPC_URL = "https://eth-sepolia.g.alchemy.com/v2/YOUR_ALCHEMY_KEY"
+ethUsdPriceFeed = "0x694AA1769357215DE4FAC081bf1f309aDC325306"
+NEXT_PUBLIC_USDC_ADDRESS = "YOUR_USDC_CONTRACT_ADDRESS"
+NEXT_PUBLIC_PRIVATE_KEY = "YOUR_ETHEREUM_PRIVATE_KEY"
+PaymanAPISecret = "YOUR_PAYMAN_API_SECRET"
+NEXT_PUBLIC_ALCHEMY_KEY = "YOUR_ALCHEMY_API_KEY"
+
+```
 
 ### Contribution Guidelines
 

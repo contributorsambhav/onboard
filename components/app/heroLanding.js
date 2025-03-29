@@ -1,11 +1,7 @@
-import { Instrument_Serif } from "next/font/google";
+import { instrumentSerif } from "@/lib/fonts";
 import { Button } from "../ui/button";
-
-const instrumentSerif = Instrument_Serif({
-  subsets: ["latin"],
-  weight: ["400"],
-});
-
+import Link from "next/link";
+import HeroNavigate from "./buttons/hero-navigate";
 export default function HeroLanding() {
   return (
     <section
@@ -188,7 +184,9 @@ export default function HeroLanding() {
           </div>
         </div>
 
-        <h1 className="mb-6 text-transparent bg-clip-text bg-gradient-to-r from-neutral-700 via-neutral-800 to-emerald-700 relative inline-block">
+        <h1
+          className={`${instrumentSerif.className} mb-6 text-transparent bg-clip-text bg-gradient-to-r from-neutral-700 via-neutral-800 to-emerald-700 relative inline-block`}
+        >
           Why Choose Crypto for International Trades
           <div className="absolute -bottom-2 left-0 right-0 mx-auto w-24 h-1 bg-gradient-to-r from-neutral-500 to-emerald-500 rounded-full"></div>
         </h1>
@@ -216,26 +214,7 @@ export default function HeroLanding() {
             </svg>
             Get Started
           </Button>
-          <Button
-            variant="outline"
-            className="border-blue-200 bg-white/70 cursor-pointer backdrop-blur-sm text-blue-800 hover:bg-blue-50 px-6 py-2.5 rounded-lg transition-all duration-300 shadow-sm font-medium"
-          >
-            <svg
-              className="w-4 h-4 mr-2 inline"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M12 6V12L16 14M22 12C22 17.5228 17.5228 22 12 22C6.47715 22 2 17.5228 2 12C2 6.47715 6.47715 2 12 2C17.5228 2 22 6.47715 22 12Z"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Calculate Savings
-          </Button>
+          <HeroNavigate />
         </div>
         <div className="flex flex-wrap justify-center gap-6 text-xs text-neutral-600">
           <div className="flex items-center gap-1.5 bg-white/60 backdrop-blur-sm px-3 py-1.5 rounded-full shadow-sm border border-blue-50">
