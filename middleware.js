@@ -19,5 +19,5 @@ export default async function authMiddleware(request) {
 
 export const config = {
   // add matcher functions here
-  matcher: ["/"],
+  matcher: ["/", "/recipients"],
 };
