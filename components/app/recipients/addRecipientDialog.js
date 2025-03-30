@@ -7,9 +7,9 @@ import {
   DialogTrigger,
   DialogClose,
 } from "@/components/ui/dialog";
-import { Button } from "../ui/button";
-import { Input } from "../ui/input";
-import { Label } from "../ui/label";
+import { Button } from "../../ui/button";
+import { Input } from "../../ui/input";
+import { Label } from "../../ui/label";
 import { Plus } from "lucide-react";
 import { instrumentSerif } from "@/lib/fonts";
 import {
@@ -18,7 +18,7 @@ import {
   SelectItem,
   SelectTrigger,
   SelectValue,
-} from "../ui/select";
+} from "../../ui/select";
 import { useSession } from "@/lib/authClient";
 import { toast } from "sonner";
 import { useState } from "react";
