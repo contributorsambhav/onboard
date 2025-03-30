@@ -83,7 +83,7 @@ export default function PaymentDashboard() {
                 <div className="bg-green-200 w-12 h-12 flex justify-center items-center rounded-full">
                   <Wallet className="w-10 text-green-700" />
                 </div>
-                <div className="font-normal text-sm">USDC</div>
+                <div className="font-normal text-sm">USD</div>
                 <p className="text-neutral-500 text-xs">USD Stablecoin</p>
               </div>
             </div>
@@ -95,9 +95,7 @@ export default function PaymentDashboard() {
             crypto={true}
           /> */}
           <div>
-            <Button className="bg-blue-700 cursor-pointer hover:bg-blue-700 w-full">
-              Send Payment
-            </Button>
+            
           </div>
         </TabsContent>
         <TabsContent value="traditional" className="mt-2 space-y-3">
@@ -150,11 +148,7 @@ export default function PaymentDashboard() {
             exchangeRate={transactionDetails.exchangeRate}
             crypto={false}
           />
-          <div>
-            <Button className="bg-blue-700 cursor-pointer hover:bg-blue-700 w-full">
-              Send Payment
-            </Button>
-          </div>
+         
         </TabsContent>
       </Tabs>
     </div>
