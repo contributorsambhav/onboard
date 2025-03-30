@@ -6,9 +6,12 @@ import DataTable from "@/components/app/table/dataTable";
 import { instrumentSerif } from "@/lib/fonts";
 import { Users } from "lucide-react";
 import TransactionCard from "@/components/app/transactionCard";
-import AddRecipientDialog from "@/components/app/addRecipientDialog";
+import AddRecipientDialog from "@/components/app/recipients/addRecipientDialog";
 import { getSession } from "@/lib/data";
 import AddMockDataButton from "@/components/app/buttons/addMockDataButton";
+import RecipientsSummary from "@/components/app/recipients/recipientsSummary";
+import RecentTransactions from "@/components/app/recipients/transactions";
+import PayRecipientsDialog from "@/components/app/recipients/payRecipientsDialog";
 
 export default async function RecipientsPage() {
   const user = await getSession();
@@ -45,7 +48,9 @@ export default async function RecipientsPage() {
                 <DataTable
                   columns={columns}
                   data={recipients?.filter(
-                    (data) => data.paymentMethod.toUpperCase() == "USDC",
+                    (data) =>
+                      data.paymentMethod.toUpperCase() == "USDC" ||
+                      data.paymentMethod.toUpperCase() == "USDT",
                   )}
                   isCrypto={true}
                 />
@@ -77,70 +82,9 @@ export default async function RecipientsPage() {
           )}
         </div>
         <div className="w-full lg:col-span-2 flex-col flex gap-4">
-          <div className="lg:col-span-2 border-2 border-neutral-200/50 bg-neutral-100/50 rounded-md h-fit">
-            <h3
-              className={`${instrumentSerif.className} bg-white rounded-t-md text-3xl font-bold px-5 py-3`}
-            >
-              Recipients Summary
-            </h3>
-            <div className="px-3 py-4">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 lg:w-10 lg:h-10 flex justify-center items-center rounded-full bg-neutral-100">
-                  <Users className="h-4 text-neutral-700" />
-                </div>
-                <div className="text-xl flex items-center">
-                  <p>{recipients?.length}</p>
-                </div>
-                <p>Recipients</p>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 flex justify-center items-center rounded-full">
-                    <div className="w-2 h-2 rounded-full bg-green-500" />
-                  </div>
-                  <p>Crypto Recipients</p>
-                </div>
-                <p className="font-medium">
-                  {
-                    recipients?.filter(
-                      (data) =>
-                        data.paymentMethod.toUpperCase() == "USDC" ||
-                        data.paymentMethod.toUpperCase() == "USDT",
-                    ).length
-                  }
-                </p>
-              </div>
-              <div className="flex items-center justify-between">
-                <div className="flex items-center gap-2">
-                  <div className="w-8 h-8 lg:w-10 lg:h-10 flex justify-center items-center rounded-full">
-                    <div className="w-2 h-2 rounded-full bg-red-500" />
-                  </div>
-                  <p>Traditional Recipients</p>
-                </div>
-                <p className="font-medium">
-                  {
-                    recipients?.filter(
-                      (data) =>
-                        data.paymentMethod.toUpperCase() !== "USDC" &&
-                        data.paymentMethod.toUpperCase() !== "USDT",
-                    ).length
-                  }
-                </p>
-              </div>
-            </div>
-          </div>
-          <div className="lg:col-span-2 border-2 border-neutral-200/50 bg-neutral-100/50 rounded-md h-fit">
-            <h3
-              className={`${instrumentSerif.className} bg-white rounded-t-md text-3xl font-bold px-5 py-3`}
-            >
-              Recent Transactions
-            </h3>
-            <div className="px-1 py-4 flex flex-col gap-3">
-              <TransactionCard />
-              <TransactionCard />
-              <TransactionCard />
-            </div>
-          </div>
+          <RecipientsSummary recipients={recipients} />
+          <PayRecipientsDialog />
+          <RecentTransactions />
         </div>
       </section>
     </div>
