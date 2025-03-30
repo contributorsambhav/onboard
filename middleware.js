@@ -1,13 +1,22 @@
 
 import { NextResponse } from "next/server";
-import { getSession } from "./lib/data";
+import { betterFetch } from "@better-fetch/fetch";
 
 export default async function authMiddleware(request) {
   // extracting out full path of the url except base url
   const { pathname, search, hash } = request.nextUrl;
   const fullPath = `${pathname}${search}${hash}`;
 
-  const session = await getSession();
+  const { data: session } = await betterFetch(
+    "/api/auth/get-session",
+    {
+      baseURL: request.nextUrl.origin,
+      headers: {
+        //get the cookie from the request
+        cookie: request.headers.get("cookie") || "",
+      },
+    },
+  );
 
   if (!session) {
     // adding user current route in searchParam
