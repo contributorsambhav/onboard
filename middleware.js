@@ -1,3 +1,4 @@
+
 import { NextResponse } from "next/server";
 import { getSession } from "./lib/data";
 
@@ -18,6 +19,10 @@ export default async function authMiddleware(request) {
 }
 
 export const config = {
+  unstable_allowDynamic: [
+    '/lib/utilities.js', // allows a single file
+    '**/node_modules/function-bind/**', // use a glob to allow anything in the function-bind 3rd party module
+  ],
   // add matcher functions here
   matcher: ["/", "/recipients"],
 };
