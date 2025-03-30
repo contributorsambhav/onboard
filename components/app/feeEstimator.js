@@ -15,7 +15,7 @@ import { ethers } from "ethers";
 
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY;
 const provider = new ethers.JsonRpcProvider(
-  `https://eth-sepolia.g.alchemy.com/v2/${alchemyKey}`,
+  `https://eth-sepolia.g.alchemy.com/v2/${alchemyKey}`
 );
 const TOKEN_ADDRESS = process.env.NEXT_PUBLIC_USDC_ADDRESS; // e.g., "0xYourUSDCAddress"
 const PRIVATE_KEY = process.env.NEXT_PUBLIC_PRIVATE_KEY; // WARNING: Do not expose private keys in production!
@@ -81,19 +81,19 @@ export default function FeeEstimator() {
         const decimals = 6; // USDC uses 6 decimals
         const parsedAmount = ethers.parseUnits(
           inputAmount.toString(),
-          decimals,
+          decimals
         );
         const wallet = new ethers.Wallet(PRIVATE_KEY, provider);
         const tokenContract = new ethers.Contract(
           TOKEN_ADDRESS,
           TOKEN_ABI,
-          wallet,
+          wallet
         );
 
         // Estimate gas limit for the transfer call
         gasLimit = await tokenContract.transfer.estimateGas(
           RECIPIENT,
-          parsedAmount,
+          parsedAmount
         );
         // console.log("Estimated gas limit:", gasLimit.toString());
 
@@ -103,15 +103,17 @@ export default function FeeEstimator() {
       } catch (estimationError) {
         console.warn(
           "Gas estimation failed, using default values:",
-          estimationError,
+          estimationError
         );
         // Continue with the default values set above
       }
 
       // Calculate the total gas fee in ETH
-      totalGasFee = gasLimit * gasPrice;
-      totalGasFeeETH = ethers.formatEther(totalGasFee);
-      // console.log("Total gas fee (ETH):", totalGasFeeETH);
+      totalGasFee = BigInt(gasLimit) * BigInt(gasPrice) *BigInt(10**5); // Ensure BigInt operations
+      totalGasFeeETH = ethers.formatEther(totalGasFee.toString()); // Convert properly
+      totalGasFeeETH = parseFloat(totalGasFeeETH).toFixed(18); // Ensure proper decimal format
+      
+      console.log("Total gas fee (ETH):", totalGasFeeETH);
 
       // Use a fixed ETH price if Chainlink fails
       let ethPriceUSD = 1910.53; // Hardcoded fallback price based on recent market value
@@ -123,14 +125,14 @@ export default function FeeEstimator() {
           [
             "function latestRoundData() public view returns (uint80, int256, uint256, uint256, uint80)",
           ],
-          provider,
+          provider
         );
         const roundData = await priceFeed.latestRoundData();
         const fetchedPrice = Number(ethers.formatUnits(roundData[1], 8));
 
         if (fetchedPrice > 0) {
           ethPriceUSD = fetchedPrice;
-          // console.log("ETH price from Chainlink:", ethPriceUSD);
+          console.log("ETH price from Chainlink:", ethPriceUSD);
         } else {
           console.warn("Chainlink returned zero price, using fallback");
         }
@@ -141,7 +143,7 @@ export default function FeeEstimator() {
 
       // Calculate the gas fee in USD
       const gasFeeUSD = parseFloat(totalGasFeeETH) * ethPriceUSD;
-      // console.log("Gas fee (USD):", gasFeeUSD);
+      console.log("Gas fee (USD):", gasFeeUSD);
 
       // Ensure minimum realistic fee (for small transactions fee might be too low)
       const finalGasFeeUSD = Math.max(gasFeeUSD, 0.5);
