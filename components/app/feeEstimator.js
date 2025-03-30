@@ -246,9 +246,14 @@ export default function FeeEstimator() {
   };
 
   const handleAmountChange = (e) => {
-    setAmount(Number(e.target.value));
+    let value = Number(e.target.value);
+    if (value > 10000) {
+      value = 10000; // Restrict max value to 10,000
+    }
+    setAmount(value);
     calculateFee();
   };
+  
 
   return (
     <div className="grid gap-3 md:grid-cols-2">
@@ -266,7 +271,9 @@ export default function FeeEstimator() {
           </div>
           <div className="pt-2">
             <div className="space-y-2 pt-2">
-              <Label>Amount to Send (USD)</Label>
+              <Label>Amount to Send (USD) </Label>
+              <p className="text-neutral-700 text-sm">
+              Max 10000USD</p>
               <Input
                 type="number"
                 value={amount}
