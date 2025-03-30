@@ -113,7 +113,7 @@ export default function FeeEstimator() {
       totalGasFeeETH = ethers.formatEther(totalGasFee.toString()); // Convert properly
       totalGasFeeETH = parseFloat(totalGasFeeETH).toFixed(18); // Ensure proper decimal format
 
-      console.log("Total gas fee (ETH):", totalGasFeeETH);
+      // console.log("Total gas fee (ETH):", totalGasFeeETH);
 
       // Use a fixed ETH price if Chainlink fails
       let ethPriceUSD = 1910.53; // Hardcoded fallback price based on recent market value
@@ -132,7 +132,7 @@ export default function FeeEstimator() {
 
         if (fetchedPrice > 0) {
           ethPriceUSD = fetchedPrice;
-          console.log("ETH price from Chainlink:", ethPriceUSD);
+          // console.log("ETH price from Chainlink:", ethPriceUSD);
         } else {
           console.warn("Chainlink returned zero price, using fallback");
         }
@@ -143,7 +143,7 @@ export default function FeeEstimator() {
 
       // Calculate the gas fee in USD
       const gasFeeUSD = parseFloat(totalGasFeeETH) * ethPriceUSD;
-      console.log("Gas fee (USD):", gasFeeUSD);
+      // console.log("Gas fee (USD):", gasFeeUSD);
 
       // Ensure minimum realistic fee (for small transactions fee might be too low)
       const finalGasFeeUSD = Math.max(gasFeeUSD, 0.5);

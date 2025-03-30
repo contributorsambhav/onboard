@@ -3,9 +3,6 @@ import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { TabsContent } from "@radix-ui/react-tabs";
 import { columns } from "@/components/app/table/columns";
 import DataTable from "@/components/app/table/dataTable";
-import { instrumentSerif } from "@/lib/fonts";
-import { Users } from "lucide-react";
-import TransactionCard from "@/components/app/transactionCard";
 import AddRecipientDialog from "@/components/app/recipients/addRecipientDialog";
 import { getSession } from "@/lib/data";
 import AddMockDataButton from "@/components/app/buttons/addMockDataButton";
@@ -16,11 +13,22 @@ import PayRecipientsDialog from "@/components/app/recipients/payRecipientsDialog
 export default async function RecipientsPage() {
   const user = await getSession();
   const userId = user?.id;
-  const resData = await fetch(
-    `${process.env.NEXT_PUBLIC_BASE_URL}/api/recipients?userId=${userId}`,
-  );
-  const data = await resData.json();
-  const recipients = data.data;
+  const [recipientsResponse, transactionsResponse] = await Promise.all([
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/recipients?userId=${userId}`,
+    ),
+    fetch(
+      `${process.env.NEXT_PUBLIC_BASE_URL}/api/recipients/transactions?userId=${userId}`,
+    ),
+  ]);
+
+  // Parse the JSON responses
+  const recipientsData = await recipientsResponse.json();
+  const transactionsData = await transactionsResponse.json();
+
+  // Extract the data
+  const recipients = recipientsData.data;
+  const recentTransactions = transactionsData.data;
   return (
     <div className="pb-16">
       <header>
@@ -83,8 +91,8 @@ export default async function RecipientsPage() {
         </div>
         <div className="w-full lg:col-span-2 flex-col flex gap-4">
           <RecipientsSummary recipients={recipients} />
-          <PayRecipientsDialog />
-          <RecentTransactions />
+          <PayRecipientsDialog recipients={recipients} userId={userId} />
+          <RecentTransactions recentTransactions={recentTransactions} />
         </div>
       </section>
     </div>

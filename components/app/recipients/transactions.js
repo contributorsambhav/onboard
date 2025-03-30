@@ -1,7 +1,7 @@
 import { instrumentSerif } from "@/lib/fonts";
 import TransactionCard from "../transactionCard";
 
-export default function RecentTransactions() {
+export default function RecentTransactions({ recentTransactions }) {
   return (
     <div className="lg:col-span-2 border-2 border-neutral-200/50 bg-neutral-100/50 rounded-md h-fit">
       <h3
@@ -9,11 +9,24 @@ export default function RecentTransactions() {
       >
         Recent Transactions
       </h3>
-      <div className="px-1 py-4 flex flex-col gap-3">
-        <TransactionCard />
-        <TransactionCard />
-        <TransactionCard />
-      </div>
+      {recentTransactions?.length > 0 ? (
+        <div className="px-2 py-2 flex flex-col gap-2">
+          {recentTransactions.map((transaction, index) => (
+            <TransactionCard
+              name={transaction.recipientId.name}
+              amount={transaction.amount}
+              paymentMethod={transaction.paymentMethod}
+              status={transaction.status}
+              date={transaction.createdAt}
+              key={index}
+            />
+          ))}
+        </div>
+      ) : (
+        <div className="h-32 bg-neutral-100 flex justify-center items-center">
+          No Transactions
+        </div>
+      )}
     </div>
   );
 }

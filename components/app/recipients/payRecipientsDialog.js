@@ -4,7 +4,7 @@ import {
   Dialog,
   DialogContent,
   DialogDescription,
-  DialogFooter,
+  // DialogFooter,
   DialogHeader,
   DialogTitle,
   DialogTrigger,
@@ -12,24 +12,62 @@ import {
 import { useState } from "react";
 import { instrumentSerif } from "@/lib/fonts";
 import { CreditCard, ChartScatter, Loader } from "lucide-react";
+import { useRouter } from "next/navigation";
 
-export default function PayRecipientsDialog({ recipients }) {
+export default function PayRecipientsDialog({ recipients, userId }) {
   const [isLoading, setIsLoading] = useState(false);
+  const [paymentState, setPaymentState] = useState("");
+  const router = useRouter();
 
   const handleAnaylzeClick = async () => {
     try {
       setIsLoading(true);
-      await new Promise((res, rej) => {
-        setTimeout(() => {
-          console.log("hi");
-          res(); // Resolve the promise after 2 seconds
-        }, 2000);
-      });
-      console.log("Promise resolved after 2 seconds");
+      setPaymentState("Sending Recipients data to AI agent...");
+      const res = await fetch(
+        "https://hiraya-ai-backend.chauhananiket2004.workers.dev/api/v1/anaylze-query",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            recipients: recipients,
+          }),
+        },
+      );
+      const data = await res.json();
+      // console.log(data);
+      const { success, successfulPayments, pendingPayments } = data;
+      if (success) {
+        setPaymentState(
+          "AI agent has successfully anaylzed the recipients, Adding transactions to the database...",
+        );
+        const res = await fetch("/api/recipients/transactions", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            userId: userId,
+            transactions: successfulPayments,
+          }),
+        });
+        // console.log(successfulPayments);
+        // console.log(pendingPayments);
+        if (res.ok) {
+          setPaymentState(
+            "Transactions have been successfully added to the database.",
+          );
+          router.refresh();
+        }
+      } else {
+        setPaymentState("AI agent failed to anayze the recipients");
+      }
     } catch (err) {
       console.log(err);
     } finally {
       setIsLoading(false);
+      router.refresh();
     }
   };
   return (

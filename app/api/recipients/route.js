@@ -95,7 +95,7 @@ export async function GET(req) {
     // Check if the user ID is provided.
     if (!userId) {
       return NextResponse.json(
-        { message: "User ID is required" },
+        { message: "User ID is required", success: false },
         { status: 400 },
       );
     }
@@ -113,7 +113,7 @@ export async function GET(req) {
   } catch (err) {
     console.error(err); // Log any errors that occur.
     return NextResponse.json(
-      { message: "Internal Server Error" },
+      { message: "Internal Server Error", success: false },
       { status: 500 },
     );
   }

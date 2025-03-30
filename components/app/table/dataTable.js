@@ -97,8 +97,8 @@ export default function DataTable({ columns, data }) {
                               ? "flex justify-center w-fit items-center text-green-900 px-3 bg-green-100 border border-green-200 text-xs py-0.5 rounded-full"
                               : "text-red-900 border text-xs border-red-200 bg-red-50 rounded-full px-3 py-0.5"
                             : cell.column.id === "email"
-                            ? "block max-w-32 md:max-w-xs truncate text-sm"
-                            : ""
+                              ? "block max-w-32 md:max-w-xs truncate text-sm"
+                              : ""
                         }
                         title={
                           cell.column.id === "email" ? cell.getValue() : ""
@@ -153,39 +153,57 @@ export default function DataTable({ columns, data }) {
           <DialogHeader>
             <DialogTitle>Row Details</DialogTitle>
             <DialogDescription>
-  {selectedRow ? (
-    <div className="overflow-x-auto">
-      <table className="min-w-full divide-y divide-gray-200">
-        <tbody className="bg-white divide-y divide-gray-200">
-          <tr>
-            <td className="px-4 py-2 font-medium text-neutral-700">Name</td>
-            <td className="px-4 py-2 text-neutral-900">{selectedRow.original.name}</td>
-          </tr>
-          <tr>
-            <td className="px-4 py-2 font-medium text-neutral-700">Email</td>
-            <td className="px-4 py-2 text-neutral-900">{selectedRow.original.email}</td>
-          </tr>
-          <tr>
-            <td className="px-4 py-2 font-medium text-neutral-700">Country</td>
-            <td className="px-4 py-2 text-neutral-900">{selectedRow.original.country}</td>
-          </tr>
-          <tr>
-            <td className="px-4 py-2 font-medium text-neutral-700">Payment Method</td>
-            <td className="px-4 py-2 text-neutral-900">{selectedRow.original.paymentMethod}</td>
-          </tr>
-          <tr>
-            <td className="px-4 py-2 font-medium text-neutral-700">Amount</td>
-            <td className="px-4 py-2 text-neutral-900">{selectedRow.original.amount}</td>
-          </tr>
-        </tbody>
-      </table>
-    </div>
-  ) : (
-    "No details available."
-  )}
-</DialogDescription>
-
-
+              {selectedRow ? (
+                <div className="overflow-x-auto">
+                  <table className="min-w-full divide-y divide-gray-200">
+                    <tbody className="bg-white divide-y divide-gray-200">
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-neutral-700">
+                          Name
+                        </td>
+                        <td className="px-4 py-2 text-neutral-900">
+                          {selectedRow.original.name}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-neutral-700">
+                          Email
+                        </td>
+                        <td className="px-4 py-2 text-neutral-900">
+                          {selectedRow.original.email}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-neutral-700">
+                          Country
+                        </td>
+                        <td className="px-4 py-2 text-neutral-900">
+                          {selectedRow.original.country}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-neutral-700">
+                          Payment Method
+                        </td>
+                        <td className="px-4 py-2 text-neutral-900">
+                          {selectedRow.original.paymentMethod}
+                        </td>
+                      </tr>
+                      <tr>
+                        <td className="px-4 py-2 font-medium text-neutral-700">
+                          Amount
+                        </td>
+                        <td className="px-4 py-2 text-neutral-900">
+                          {selectedRow.original.amount}
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              ) : (
+                "No details available."
+              )}
+            </DialogDescription>
           </DialogHeader>
           <DialogClose asChild>
             <Button onClick={() => setDialogOpen(false)}>Close</Button>

@@ -11,7 +11,6 @@ export async function POST(request) {
       xPaymanAPISecret: process.env.PaymanAPISecret,
     });
 
-    
     // Send the payment using the dynamic amount
     const payment = await payman.payments.sendPayment({
       amountDecimal, // dynamic amount

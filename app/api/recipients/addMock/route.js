@@ -10,14 +10,14 @@ export async function POST(req) {
     const { userId } = await req.json();
     if (!userId) {
       return NextResponse.json(
-        { message: "User ID is required" },
+        { message: "User ID is required", success: false },
         { status: 400 },
       );
     }
 
     if (!mongoose.Types.ObjectId.isValid(userId)) {
       return NextResponse.json(
-        { message: "Invalid User ID format" },
+        { message: "Invalid User ID format", success: false },
         { status: 400 },
       );
     }
@@ -29,7 +29,10 @@ export async function POST(req) {
     });
     // console.log(userExists);
     if (!userExists) {
-      return NextResponse.json({ message: "User not found" }, { status: 404 });
+      return NextResponse.json(
+        { message: "User not found", success: false },
+        { status: 404 },
+      );
     }
 
     // first check if recipeints are already populated if only one is present there te
@@ -52,7 +55,7 @@ export async function POST(req) {
     const recipients = await populateRecipients(userId);
     if (!recipients) {
       return NextResponse.json(
-        { message: "No recipients found" },
+        { message: "No recipients found", success: false },
         { status: 404 },
       );
     }
@@ -69,7 +72,7 @@ export async function POST(req) {
   } catch (err) {
     console.log(err);
     return NextResponse.json(
-      { message: "Internal Server Error" },
+      { message: "Internal Server Error", success: false },
       { status: 500 },
     );
   }
