@@ -12,7 +12,7 @@ import {
 import { Button } from "../ui/button";
 import { ArrowRightLeft, DollarSign } from "lucide-react";
 import { ethers } from "ethers";
-
+import { Progress } from "../ui/progress";
 const alchemyKey = process.env.NEXT_PUBLIC_ALCHEMY_KEY;
 const provider = new ethers.JsonRpcProvider(
   `https://eth-sepolia.g.alchemy.com/v2/${alchemyKey}`,
@@ -187,7 +187,10 @@ export default function FeeEstimator() {
   // For conceptual purposes, we add the estimated gas fee (in USD) to the payment amount.
   const handleTransaction = async () => {
     if (!amount || isNaN(amount) || Number(amount) <= 0) {
-      setTxError("Please enter a valid amount.");
+      setTxError("Please enter a valid amount. (Between 0 and 10000)");
+      setTimeout(() => {
+        setTxError("");
+      }, 3000);
       return;
     }
     if (!gasResult) {
@@ -254,6 +257,32 @@ export default function FeeEstimator() {
     calculateFee();
   };
 
+  useEffect(() => {
+    async function load(params) {
+      try {
+        const res = await fetch("/api/payman", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({
+            amountDecimal: 1, // dynamic payment amount including gas fee
+            payeeId: "pd-1f009380-1112-6a45-9ce3-ff7ca7c48292", // example payee id
+            memo: "Invoice #1234",
+          }),
+        });
+        const data = await res.json();
+        if (!res.ok) {
+          throw new Error(data.error || "Transaction failed");
+        }
+        // Update spendable balance from the API response
+        setSpendableBalance(data.spendableBalance);
+      } catch (error) {
+        console.error("Error processing Payman transaction:", error);
+        setTxError("Transaction failed. See console for details.");
+      }
+    }
+
+    load();
+  }, []);
   return (
     <div className="grid gap-3 md:grid-cols-2">
       {/* Traditional Payment Fee Estimator */}
@@ -353,27 +382,39 @@ export default function FeeEstimator() {
           </div>
           {/* Transaction Controls */}
           <div className="pt-2">
-            {txError && (
-              <div className="text-red-500 text-sm pt-2">{txError}</div>
-            )}
-            {spendableBalance !== null && (
-              <div className="mt-4">
-                <span className="font-semibold">Spendable Balance:</span> $
-                {Number(spendableBalance).toFixed(2)}
-              </div>
-            )}
+          <div className="text-red-500 text-sm pt-2 max-h-[17px] min-h-[17px]">
+  {txError ? (
+    <span>{txError}</span>
+  ) : gasResult && fee > 0 ? (
+    <Progress
+      value={
+        ((Number(fee) - Number(gasResult.gasFeeUSD)) / Number(fee)) * 100
+      }
+      className="bg-neutral-100 mt-2"
+    />
+  ) : null}
+</div>
+
+
+            <div className="mt-4">
+              <span className="font-semibold">Spendable Balance:</span> $
+              {spendableBalance !== null && Number(spendableBalance).toFixed(2)}
+            </div>
           </div>
           {/* Optionally display gas details if needed */}
-          {gasLoading && <div>Estimating gas fees...</div>}
           {gasError && <div className="text-red-500 text-sm">{gasError}</div>}
           <Button
             onClick={handleTransaction}
             className="w-full cursor-pointer"
             disabled={txLoading || gasLoading}
           >
-            {txLoading
-              ? "Processing Transaction..."
-              : "Send Payment via Payman TSD"}
+            {gasLoading ? (
+              <div>Estimating gas fees...</div>
+            ) : txLoading ? (
+              "Processing Transaction..."
+            ) : (
+              "Send Payment via Payman TSD"
+            )}
           </Button>
           {/* <div className="border p-3 w-full border-green-200 rounded-md bg-green-50/20">
             <div className="flex justify-between items-center">

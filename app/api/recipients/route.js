@@ -1,7 +1,9 @@
+export const config = {
+  runtime: 'nodejs', // Forces the route to use the Node.js runtime
+};
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/connect";
 import Recipient from "@/lib/models/recipients.model";
-
 /**
  * Handles the creation of a new recipient.
  *
