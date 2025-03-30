@@ -4,6 +4,10 @@ export const columns = [
     header: "Name",
   },
   {
+    accessorKey: "email",
+    header: "email",
+  },
+  {
     accessorKey: "country",
     header: "Country",
   },
@@ -12,11 +16,7 @@ export const columns = [
     header: "Payment",
   },
   {
-    accessorKey: "lastPayment",
-    header: "Last Payment",
+    accessorKey: "amount",
+    header: "Amount",
   },
-  // {
-  //   accessorKey: "actions",
-  //   header: "Actions",
-  // }
 ];

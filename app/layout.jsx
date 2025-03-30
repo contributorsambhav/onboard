@@ -1,5 +1,7 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist } from "next/font/google";
 import "./globals.css";
+import { Toaster } from "sonner";
+import { CircleCheck, CircleX } from "lucide-react";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -15,7 +17,16 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.className} antialiased`}>{children}</body>
+      <body className={`${geistSans.className} antialiased`}>
+        <Toaster
+          position="top-center"
+          icons={{
+            success: <CircleCheck className="w-4 h-4 text-green-500" />,
+            error: <CircleX className="w-4 h-4 text-red-500" />,
+          }}
+        />
+        {children}
+      </body>
     </html>
   );
 }

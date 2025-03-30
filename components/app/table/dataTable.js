@@ -75,18 +75,25 @@ export default function DataTable({ columns, data }) {
                     <TableCell key={cell.id}>
                       <span
                         className={
-                          cell.column.id == "paymentMethod"
-                            ? cell.getValue() == "USDC" ||
-                              cell.getValue() == "USDT"
+                          cell.column.id === "paymentMethod"
+                            ? cell.getValue().toUpperCase() === "USDC" ||
+                              cell.getValue().toUpperCase() === "USDT"
                               ? "flex justify-center w-fit items-center text-green-900 px-3 bg-green-100 border border-green-200 text-xs py-0.5 rounded-full"
                               : "text-red-900 border text-xs border-red-200 bg-red-50 rounded-full px-3 py-0.5"
-                            : ""
+                            : cell.column.id === "email"
+                              ? "block max-w-32 md:max-w-xs truncate text-sm" // Truncate email for small screens
+                              : ""
                         }
+                        title={
+                          cell.column.id === "email" ? cell.getValue() : ""
+                        } // Show full email on hover
                       >
-                        {flexRender(
-                          cell.column.columnDef.cell,
-                          cell.getContext(),
-                        )}
+                        {cell.column.id === "email"
+                          ? cell.getValue() // Full email is truncated visually
+                          : flexRender(
+                              cell.column.columnDef.cell,
+                              cell.getContext(),
+                            )}
                       </span>
                     </TableCell>
                   ))}
