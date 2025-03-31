@@ -183,7 +183,6 @@ export default function HeroLanding() {
             </span>
           </div>
         </div>
-
         <h1
           className={`${instrumentSerif.className} mb-6 text-transparent bg-clip-text bg-gradient-to-r from-neutral-700 via-neutral-800 to-emerald-700 relative inline-block`}
         >

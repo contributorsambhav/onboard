@@ -17,7 +17,7 @@ import { useRouter } from "next/navigation";
 export default function PayRecipientsDialog({ recipients, userId }) {
   const [isLoading, setIsLoading] = useState(false);
   const [paymentState, setPaymentState] = useState(
-    "Click the button to anaylze the recipients",
+    "Click the button to analyze the recipients and pay them.",
   );
   const router = useRouter();
 
@@ -37,11 +37,11 @@ export default function PayRecipientsDialog({ recipients, userId }) {
           "No recipients with USDC / USDT payment method present",
         );
         setTimeout(() => {
-          setPaymentState("Click the button to analyze the recipients");
+          setPaymentState("Click the button to analyze the recipients and pay them.");
         }, 2000);
       } else {
         const res = await fetch(
-          "https://hiraya-ai-backend.chauhananiket2004.workers.dev/api/v1/anaylze-query",
+          `${process.env.NEXT_PUBLIC_AI_BACKEND_URL}/api/v1/anaylze-query`,
           {
             method: "POST",
             headers: {
@@ -73,7 +73,7 @@ export default function PayRecipientsDialog({ recipients, userId }) {
           // console.log(pendingPayments);
           if (res.ok) {
             setPaymentState(
-              "Transactions have been successfully added to the database.",
+              "Transactions have been successfully done, please check the transactions section",
             );
             router.refresh();
           }
@@ -112,7 +112,7 @@ export default function PayRecipientsDialog({ recipients, userId }) {
               cost-effective payment method for each one.
             </DialogDescription>
             <div className="h-32 p-2 rounded-md bg-neutral-100 flex justify-center items-center">
-              <p className="text-sm text-center text-neutral-700 transition-all duration-200 ease-out">
+              <p className="text-sm px-2 text-center text-neutral-700 transition-all duration-200 ease-out">
                 {paymentState}
               </p>
             </div>
@@ -129,7 +129,7 @@ export default function PayRecipientsDialog({ recipients, userId }) {
             ) : (
               <span className="flex items-center">
                 <ChartScatter className="h-4 mr-1" />
-                Analyze with Hiraya
+                Analyze & Pay
               </span>
             )}
           </Button>

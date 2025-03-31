@@ -40,8 +40,8 @@ export default async function RecipientsPage() {
       </header>
       <section className="pt-20 px-5">
         <div className="flex items-center gap-3 justify-between">
-          <p className={`text-4xl font-extrabold ${instrumentSerif.className}`}>
-            Recipients
+          <p className={`text-2xl mg:text-3xl lg:text-4xl transition-all duration-200 ease-out font-extrabold ${instrumentSerif.className}`}>
+            Recipients Dashboard
           </p>
           <AddRecipientDialog />
         </div>

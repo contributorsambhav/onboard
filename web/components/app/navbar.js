@@ -16,12 +16,12 @@ export default async function Navbar() {
         <div className="hidden md:flex items-center gap-3">
           {session ? (
             <div className="flex gap-3 items-center">
-              <div className="text-sm">
-                <SignOut />
-              </div>
               <Link href="/recipients" className="text-sm text-neutral-700">
                 Recipients
               </Link>
+              <div className="text-sm">
+                <SignOut />
+              </div>
               {/* <div>
                 <Button className="h-7 text-xs shadow-none" variant="outline">
                   Connect Wallet
