@@ -382,19 +382,20 @@ export default function FeeEstimator() {
           </div>
           {/* Transaction Controls */}
           <div className="pt-2">
-          <div className="text-red-500 text-sm pt-2 max-h-[17px] min-h-[17px]">
-  {txError ? (
-    <span>{txError}</span>
-  ) : gasResult && fee > 0 ? (
-    <Progress
-      value={
-        ((Number(fee) - Number(gasResult.gasFeeUSD)) / Number(fee)) * 100
-      }
-      className="bg-neutral-100 mt-2"
-    />
-  ) : null}
-</div>
-
+            {/* <div className="text-red-500 text-sm pt-2 max-h-[17px] min-h-[17px]">
+              {txError ? (
+                <span>{txError}</span>
+              ) : gasResult && fee > 0 ? (
+                <Progress
+                  value={
+                    ((Number(fee) - Number(gasResult.gasFeeUSD)) /
+                      Number(fee)) *
+                    100
+                  }
+                  className="bg-neutral-100 mt-2"
+                />
+              ) : null}
+            </div> */}
 
             <div className="mt-4">
               <span className="font-semibold">Spendable Balance:</span> $
@@ -403,7 +404,7 @@ export default function FeeEstimator() {
           </div>
           {/* Optionally display gas details if needed */}
           {gasError && <div className="text-red-500 text-sm">{gasError}</div>}
-          <Button
+          {/* <Button
             onClick={handleTransaction}
             className="w-full cursor-pointer"
             disabled={txLoading || gasLoading}
@@ -415,7 +416,7 @@ export default function FeeEstimator() {
             ) : (
               "Send Payment via Payman TSD"
             )}
-          </Button>
+          </Button> */}
           {/* <div className="border p-3 w-full border-green-200 rounded-md bg-green-50/20">
             <div className="flex justify-between items-center">
               <p>Your Savings</p>

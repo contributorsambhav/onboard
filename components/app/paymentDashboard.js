@@ -94,9 +94,7 @@ export default function PaymentDashboard() {
             exchangeRate={transactionDetails.exchangeRate}
             crypto={true}
           /> */}
-          <div>
-            
-          </div>
+          <div></div>
         </TabsContent>
         <TabsContent value="traditional" className="mt-2 space-y-3">
           <div className="space-y-1">
@@ -148,7 +146,6 @@ export default function PaymentDashboard() {
             exchangeRate={transactionDetails.exchangeRate}
             crypto={false}
           />
-         
         </TabsContent>
       </Tabs>
     </div>

@@ -196,24 +196,12 @@ export default function HeroLanding() {
           <span className="font-semibold text-indigo-700">more secure</span>{" "}
           international transactions with cryptocurrency payments
         </p>
-        <div className="flex flex-wrap justify-center gap-4 mb-12">
-          <Button className="bg-gradient-to-r cursor-pointer from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2.5 rounded-lg shadow-lg shadow-blue-500/20 transition-all duration-300 border border-blue-700/20 font-medium">
-            <svg
-              className="w-4 h-4 mr-2 inline"
-              viewBox="0 0 24 24"
-              fill="none"
-              xmlns="http://www.w3.org/2000/svg"
-            >
-              <path
-                d="M13 5L20 12L13 19M4 12H20"
-                stroke="currentColor"
-                strokeWidth="2"
-                strokeLinecap="round"
-                strokeLinejoin="round"
-              />
-            </svg>
-            Get Started
-          </Button>
+        <div className="flex flex-wrap items-center justify-center gap-4 mb-12">
+          <Link href="/recipients" className="flex items-center">
+            <Button className="bg-gradient-to-r cursor-pointer from-blue-600 to-blue-700 hover:from-blue-700 hover:to-blue-800 text-white px-6 py-2.5 rounded-lg shadow-lg shadow-blue-500/20 transition-all duration-300 border border-blue-700/20 font-medium">
+              Recipients
+            </Button>
+          </Link>
           <HeroNavigate />
         </div>
         <div className="flex flex-wrap justify-center gap-6 text-xs text-neutral-600">

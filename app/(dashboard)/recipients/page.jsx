@@ -9,6 +9,7 @@ import AddMockDataButton from "@/components/app/buttons/addMockDataButton";
 import RecipientsSummary from "@/components/app/recipients/recipientsSummary";
 import RecentTransactions from "@/components/app/recipients/transactions";
 import PayRecipientsDialog from "@/components/app/recipients/payRecipientsDialog";
+import { instrumentSerif } from "@/lib/fonts";
 
 export default async function RecipientsPage() {
   const user = await getSession();
@@ -29,6 +30,9 @@ export default async function RecipientsPage() {
   // Extract the data
   const recipients = recipientsData.data;
   const recentTransactions = transactionsData.data;
+  const unpaidRecipients = recipients.filter(
+    (recipient) => recipient.status !== "paid",
+  );
   return (
     <div className="pb-16">
       <header>
@@ -36,7 +40,9 @@ export default async function RecipientsPage() {
       </header>
       <section className="pt-20 px-5">
         <div className="flex items-center gap-3 justify-between">
-          <p className="text-2xl font-bold">Recipients</p>
+          <p className={`text-4xl font-extrabold ${instrumentSerif.className}`}>
+            Recipients
+          </p>
           <AddRecipientDialog />
         </div>
       </section>
@@ -91,7 +97,7 @@ export default async function RecipientsPage() {
         </div>
         <div className="w-full lg:col-span-2 flex-col flex gap-4">
           <RecipientsSummary recipients={recipients} />
-          <PayRecipientsDialog recipients={recipients} userId={userId} />
+          <PayRecipientsDialog recipients={unpaidRecipients} userId={userId} />
           <RecentTransactions recentTransactions={recentTransactions} />
         </div>
       </section>

@@ -1,5 +1,6 @@
 import { instrumentSerif } from "@/lib/fonts";
 import TransactionCard from "../transactionCard";
+import { ScrollArea } from "@/components/ui/scroll-area";
 
 export default function RecentTransactions({ recentTransactions }) {
   return (
@@ -10,18 +11,18 @@ export default function RecentTransactions({ recentTransactions }) {
         Recent Transactions
       </h3>
       {recentTransactions?.length > 0 ? (
-        <div className="px-2 py-2 flex flex-col gap-2">
+        <ScrollArea className="px-2 h-56 w-full py-2 flex flex-col gap-2">
           {recentTransactions.map((transaction, index) => (
             <TransactionCard
-              name={transaction.recipientId.name}
-              amount={transaction.amount}
-              paymentMethod={transaction.paymentMethod}
-              status={transaction.status}
-              date={transaction.createdAt}
+              name={transaction?.recipientId?.name}
+              amount={transaction?.amount}
+              paymentMethod={transaction?.paymentMethod}
+              status={transaction?.status}
+              date={transaction?.createdAt}
               key={index}
             />
           ))}
-        </div>
+        </ScrollArea>
       ) : (
         <div className="h-32 bg-neutral-100 flex justify-center items-center">
           No Transactions

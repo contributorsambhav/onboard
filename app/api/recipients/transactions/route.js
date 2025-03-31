@@ -87,6 +87,16 @@ export async function POST(req) {
       const transaction = await Transaction.create(newTransaction);
       currentTransactions.push(transaction);
 
+      // now change the status to completed for the recipient
+
+      await Recipient.findOneAndUpdate(
+        {
+          _id: _id,
+        },
+        { $set: { status: "paid" } },
+        { new: true },
+      );
+
       // If the transaction creation fails, return an error response.
       if (!transaction) {
         return NextResponse.json(

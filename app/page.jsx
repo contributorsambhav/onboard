@@ -19,9 +19,9 @@ export default function Home() {
       <section className="px-5" id="fee-calculator">
         <FeeEstimator />
       </section>
-      <section className="px-5 mt-5">
+      {/* <section className="px-5 mt-5">
         <PaymentDashboard />
-      </section>
+      </section> */}
       {/* <CombinedDashboard /> */}
     </div>
   );

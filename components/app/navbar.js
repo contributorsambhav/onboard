@@ -22,11 +22,11 @@ export default async function Navbar() {
               <Link href="/recipients" className="text-sm text-neutral-700">
                 Recipients
               </Link>
-              <div>
+              {/* <div>
                 <Button className="h-7 text-xs shadow-none" variant="outline">
                   Connect Wallet
                 </Button>
-              </div>
+              </div> */}
             </div>
           ) : (
             <div className="flex gap-3 items-center text-sm">

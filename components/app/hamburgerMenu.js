@@ -19,7 +19,7 @@ export default function HamburgerMenu() {
           <div className="md:hidden bg-white backdrop-blur-sm animate-menu-animation transform-gpu transition-transform duration-200ms ease-in-out">
             <div className="cursor-pointer w-fit py-2">Sign Out</div>
             <div className="cursor-pointer w-fit py-2">Recipients</div>
-            <div className="cursor-pointer w-fit py-2">Connect Wallet</div>
+            {/* <div className="cursor-pointer w-fit py-2">Connect Wallet</div> */}
           </div>
         )}
       </div>

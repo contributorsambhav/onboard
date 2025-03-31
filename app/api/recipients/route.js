@@ -1,5 +1,5 @@
 export const config = {
-  runtime: 'nodejs', // Forces the route to use the Node.js runtime
+  runtime: "nodejs", // Forces the route to use the Node.js runtime
 };
 import { NextResponse } from "next/server";
 import { connectDB } from "@/lib/connect";

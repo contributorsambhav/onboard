@@ -66,7 +66,12 @@ export default function DataTable({ columns, data }) {
             {table.getHeaderGroups().map((headerGroup) => (
               <TableRow key={headerGroup.id}>
                 {headerGroup.headers.map((header) => (
-                  <TableHead key={header.id}>
+                  <TableHead
+                    key={header.id}
+                    className={
+                      header.column.id === "email" ? "hidden md:table-cell" : "" // Hide email column on small screens
+                    }
+                  >
                     {header.isPlaceholder
                       ? null
                       : flexRender(
@@ -88,7 +93,12 @@ export default function DataTable({ columns, data }) {
                   className="cursor-pointer hover:bg-neutral-50"
                 >
                   {row.getVisibleCells().map((cell) => (
-                    <TableCell key={cell.id}>
+                    <TableCell
+                      key={cell.id}
+                      className={
+                        cell.column.id === "email" ? "hidden md:table-cell" : "" // Hide email column on small screens
+                      }
+                    >
                       <span
                         className={
                           cell.column.id === "paymentMethod"
@@ -98,7 +108,13 @@ export default function DataTable({ columns, data }) {
                               : "text-red-900 border text-xs border-red-200 bg-red-50 rounded-full px-3 py-0.5"
                             : cell.column.id === "email"
                               ? "block max-w-32 md:max-w-xs truncate text-sm"
-                              : ""
+                              : cell.column.id === "status"
+                                ? cell.getValue() === "paid"
+                                  ? "text-green-900 px-2 text-xs rounded-full border border-green-200 bg-green-100 py-0.5"
+                                  : cell.getValue() === "pending"
+                                    ? "text-yellow-900  text-xs px-3 rounded-full border border-yellow-200 bg-yellow-100 py-0.5"
+                                    : "text-red-900 px-3 text-xs rounded-full border border-red-200 bg-red-100 py-0.5"
+                                : "text-sm"
                         }
                         title={
                           cell.column.id === "email" ? cell.getValue() : ""

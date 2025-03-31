@@ -16,52 +16,70 @@ import { useRouter } from "next/navigation";
 
 export default function PayRecipientsDialog({ recipients, userId }) {
   const [isLoading, setIsLoading] = useState(false);
-  const [paymentState, setPaymentState] = useState("");
+  const [paymentState, setPaymentState] = useState(
+    "Click the button to anaylze the recipients",
+  );
   const router = useRouter();
 
   const handleAnaylzeClick = async () => {
     try {
       setIsLoading(true);
       setPaymentState("Sending Recipients data to AI agent...");
-      const res = await fetch(
-        "https://hiraya-ai-backend.chauhananiket2004.workers.dev/api/v1/anaylze-query",
-        {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            recipients: recipients,
-          }),
-        },
+      console.log(recipients);
+      const checkRecipientsPaymentMethod = recipients.filter(
+        (recipient) =>
+          recipient.paymentMethod.toLowerCase() === "usdc" ||
+          recipient.paymentMethod.toLowerCase() === "usdc",
       );
-      const data = await res.json();
-      // console.log(data);
-      const { success, successfulPayments, pendingPayments } = data;
-      if (success) {
+      console.log(checkRecipientsPaymentMethod);
+      if (checkRecipientsPaymentMethod == 0) {
         setPaymentState(
-          "AI agent has successfully anaylzed the recipients, Adding transactions to the database...",
+          "No recipients with USDC / USDT payment method present",
         );
-        const res = await fetch("/api/recipients/transactions", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json",
-          },
-          body: JSON.stringify({
-            userId: userId,
-            transactions: successfulPayments,
-          }),
-        });
-        // console.log(successfulPayments);
-        // console.log(pendingPayments);
-        if (res.ok) {
-          setPaymentState(
-            "Transactions have been successfully added to the database.",
-          );
-          router.refresh();
-        }
+        setTimeout(() => {
+          setPaymentState("Click the button to analyze the recipients");
+        }, 2000);
       } else {
-        setPaymentState("AI agent failed to anayze the recipients");
+        const res = await fetch(
+          "https://hiraya-ai-backend.chauhananiket2004.workers.dev/api/v1/anaylze-query",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              recipients: recipients,
+            }),
+          },
+        );
+        const data = await res.json();
+        // console.log(data);
+        const { success, successfulPayments, pendingPayments } = data;
+        if (success) {
+          setPaymentState(
+            "AI agent has successfully anaylzed the recipients, Adding transactions to the database...",
+          );
+          const res = await fetch("/api/recipients/transactions", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+              userId: userId,
+              transactions: successfulPayments,
+            }),
+          });
+          // console.log(successfulPayments);
+          // console.log(pendingPayments);
+          if (res.ok) {
+            setPaymentState(
+              "Transactions have been successfully added to the database.",
+            );
+            router.refresh();
+          }
+        } else {
+          setPaymentState("AI agent failed to anayze the recipients");
+        }
       }
     } catch (err) {
       console.log(err);
@@ -93,6 +111,11 @@ export default function PayRecipientsDialog({ recipients, userId }) {
               Our AI will analyze your recipients and recommend the most
               cost-effective payment method for each one.
             </DialogDescription>
+            <div className="h-32 p-2 rounded-md bg-neutral-100 flex justify-center items-center">
+              <p className="text-sm text-center text-neutral-700 transition-all duration-200 ease-out">
+                {paymentState}
+              </p>
+            </div>
           </DialogHeader>
           <Button
             onClick={handleAnaylzeClick}
