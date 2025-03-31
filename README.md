@@ -1,8 +1,8 @@
-- **Cross-Border AI-Powered Payments**
+# **Cross-Border AI-Powered Payments**
     
-    ### **Problem:**
+### **Problem:**
     
-    Businesses incur **high FX fees** when transferring funds across borders. Many companies **aren’t aware** of cost-saving alternatives like USDC or stablecoins because they don’t know if their vendors or partners accept them. convert to markdown properly
+Businesses incur **high FX fees** when transferring funds across borders. Many companies **aren’t aware** of cost-saving alternatives like USDC or stablecoins because they don’t know if their vendors or partners accept them. convert to markdown properly
 
 # Onboard: Revolutionizing International Transactions with PaymanAI
 
