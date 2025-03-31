@@ -92,3 +92,89 @@ The recipient page is designed to provide all necessary details in one convenien
   Due to current Cloudflare restrictions, only two USDC and USDT transactions can be processed in one go. We are actively working on scaling up this limitation.
 
 ---
+
+# Getting Started
+
+Follow these steps to set up and run the project locally.
+
+## Prerequisites
+
+Make sure you have the following installed:
+- [Node.js](https://nodejs.org/) (Latest LTS version recommended)
+- [Git](https://git-scm.com/)
+
+
+
+## Installation
+
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/contributorsambhav/onboard.git
+   ```
+
+   1.1. Navigate to the project directory:
+   ```sh
+   cd web
+   ```
+
+   1.2. Set up the environment variables:
+   - Create a `.env` file in the root of the project.
+  
+ .env.example
+```sh
+NEXT_PUBLIC_AI_BACKEND_URL=
+RPC_URL=
+ethUsdPriceFeed=
+NEXT_PUBLIC_USDC_ADDRESS=
+NEXT_PUBLIC_PRIVATE_KEY=
+PaymanAPISecret=
+NEXT_PUBLIC_ALCHEMY_KEY=
+BETTER_AUTH_SECRET=
+NEXTAUTH_SECRET=
+BETTER_AUTH_URL=http://localhost:3000
+NEXT_PUBLIC_BASE_URL=http://localhost:3000
+DB_NAME=onboard
+MONGODB_URI=
+GOOGLE_CLIENT_SECRET=
+GOOGLE_CLIENT_ID=
+```
+
+   - Add the necessary environment variables as per the project requirements.
+
+   1.3. Install dependencies:
+   ```sh
+   npm install
+   ```
+
+   1.4. Start the development:
+   ```sh
+   npm run dev
+   ```
+
+2. Navigate to the backend directory:
+   ```sh
+   cd ai-backend
+   ```
+
+   2.1. Install pnpm:
+   ```sh
+   npm install -g pnpm
+   ```
+
+   2.2. Install dependencies:
+   ```sh
+   pnpm install
+   ```
+
+   2.3. Start the backend server:
+   ```sh
+   pnpm run dev
+   ```
+
+## Usage
+Once the development server is running, open your browser and navigate to the provided localhost URL.
+
+## Contributing
+If you'd like to contribute, please fork the repository and create a pull request.
+
+
