@@ -11,7 +11,7 @@ import {
 } from "@/components/ui/dialog";
 import { useState } from "react";
 import { instrumentSerif } from "@/lib/fonts";
-import { CreditCard, ChartScatter, Loader } from "lucide-react";
+import { CreditCard, ChartScatter, Loader, CircleAlert } from "lucide-react";
 import { useRouter } from "next/navigation";
 
 export default function PayRecipientsDialog({ recipients, userId }) {
@@ -107,14 +107,21 @@ export default function PayRecipientsDialog({ recipients, userId }) {
             <DialogTitle className={`${instrumentSerif.className} text-3xl`}>
               Pay Recipients
             </DialogTitle>
-            <DialogDescription>
-              Our AI will analyze your recipients and recommend the most
-              cost-effective payment method for each one.
+            <DialogDescription className="">
+              <p>
+                Our AI will analyze your recipients and recommend the most
+                cost-effective payment method for each one.
+              </p>
+              <div className="p-3 rounded-md border flex gap-1 border-red-200 bg-red-100 text-red-800 text-xs mt-3">
+                <CircleAlert className="h-4 w-4" />
+                Due to cloudflare limitation only two payment with usdc and usdt will be processed in one go with ai agent.
+              </div>
             </DialogDescription>
-            <div className="h-32 p-2 rounded-md bg-neutral-100 flex justify-center items-center">
+            <div className="h-48 p-2 rounded-md bg-neutral-100 flex flex-col justify-center items-center">
               <p className="text-sm px-2 text-center text-neutral-700 transition-all duration-200 ease-out">
                 {paymentState}
               </p>
+              
             </div>
           </DialogHeader>
           <Button

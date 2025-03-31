@@ -10,8 +10,28 @@ const geistSans = Geist({
 });
 
 export const metadata = {
-  title: "Onboard",
-  description: "Onboard is a platform for international transactions.",
+  title: {
+    template: "%s | Onboard",
+    default: "Onboard",
+  },
+  description: "Onboard is a platform for international cross border transactions. Powered by PaymanAI",
+  metadataBase: new URL("https://onboard-iota-seven.vercel.app/"),
+  openGraph: {
+    title: "Onboard",
+    description: "Onboard is a platform for international cross border transactions. Powered by PaymanAI",
+    url: "https://onboard-iota-seven.vercel.app/",
+    siteName: "Onboard",
+    images: [
+      {
+        url: "/hero.png",
+        width: 1200,
+        height: 630,
+        alt: "Onboard",
+      }
+    ],
+    locale: "en_US",
+    type: "website",
+  }
 };
 
 export default function RootLayout({ children }) {

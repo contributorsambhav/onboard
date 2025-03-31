@@ -179,7 +179,7 @@ export default function HeroLanding() {
             <div className="w-2 h-2 rounded-full bg-neutral-500 animate-pulse"></div>
             <span className="font-medium text-neutral-800">Onboard</span> -{" "}
             <span className="bg-clip-text text-transparent bg-gradient-to-r from-blue-500 to-neutral-500">
-              Powered by PaymanAI
+              Powered by <a href="https://paymanai.com/" target="_blank">PaymanAI</a>
             </span>
           </div>
         </div>

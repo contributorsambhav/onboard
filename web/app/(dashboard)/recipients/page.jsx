@@ -11,6 +11,12 @@ import RecentTransactions from "@/components/app/recipients/transactions";
 import PayRecipientsDialog from "@/components/app/recipients/payRecipientsDialog";
 import { instrumentSerif } from "@/lib/fonts";
 
+export const metadata = {
+  title: "Recipients Dashboard",
+  description:
+    "Recipients Dashboard - Onboard is a platform for international cross border transactions. Powered by PaymanAI",
+};
+
 export default async function RecipientsPage() {
   const user = await getSession();
   const userId = user?.id;
@@ -97,7 +103,7 @@ export default async function RecipientsPage() {
         </div>
         <div className="w-full lg:col-span-2 flex-col flex gap-4">
           <RecipientsSummary recipients={recipients} />
-          <PayRecipientsDialog recipients={unpaidRecipients} userId={userId} />
+            <PayRecipientsDialog recipients={unpaidRecipients} userId={userId} />
           <RecentTransactions recentTransactions={recentTransactions} />
         </div>
       </section>
