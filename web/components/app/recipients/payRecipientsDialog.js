@@ -29,7 +29,7 @@ export default function PayRecipientsDialog({ recipients, userId }) {
       const checkRecipientsPaymentMethod = recipients.filter(
         (recipient) =>
           recipient.paymentMethod.toLowerCase() === "usdc" ||
-          recipient.paymentMethod.toLowerCase() === "usdc",
+          recipient.paymentMethod.toLowerCase() === "usdt",
       );
       console.log(checkRecipientsPaymentMethod);
       if (checkRecipientsPaymentMethod == 0) {
