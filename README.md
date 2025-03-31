@@ -1,3 +1,9 @@
+- **Cross-Border AI-Powered Payments**
+    
+    ### **Problem:**
+    
+    Businesses incur **high FX fees** when transferring funds across borders. Many companies **aren’t aware** of cost-saving alternatives like USDC or stablecoins because they don’t know if their vendors or partners accept them. convert to markdown properly
+
 # Onboard: Revolutionizing International Transactions with PaymanAI
 
 **Onboard** is an innovative platform powered by PaymanAI that redefines cross-border payments using cryptocurrency. Our solution removes traditional banking hurdles, ensuring that international transactions are faster, more cost-effective, and secure.
